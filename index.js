@@ -32,6 +32,44 @@ app.get("/getCard/:id", async (req, res) => {
   }
 });
 
+app.put("/updateCard/:id", async (req, res) => {
+  try {
+    const card = await Card.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      overwrite: true,
+    });
+    if (!card) return res.status(404).send("Card not found");
+    res.status(200).json(card);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error updating card");
+  }
+});
+
+app.patch("/updateCard/:id", async (req, res) => {
+  try {
+    const card = await Card.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!card) return res.status(404).send("Card not found");
+    res.status(200).json(card);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error partially updating card");
+  }
+});
+
+app.delete("/deleteCard/:id", async (req, res) => {
+  try {
+    const card = await Card.findByIdAndDelete(req.params.id);
+    if (!card) return res.status(404).send("Card not found");
+    res.status(200).send("Card deleted successfully");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error deleting card");
+  }
+});
+
 app.post("/cards", async (req, res) => {
   try {
     const card = await Card.create(req.body);
