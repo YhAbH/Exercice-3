@@ -99,3 +99,39 @@ app.get("/Hola", (req, res) => {
 app.listen(3000, () => {
   console.log("Server is running on http://localhost:3000");
 });
+app.get("/template", (req, res) => {
+  const template = [
+    {
+      path: "https://exercice-3-1.onrender.com/createCard",
+      method: "POST",
+      description: "Crea una nueva tarjeta en la base de datos",
+    },
+    {
+      path: "https://exercice-3-1.onrender.com/getAllCards",
+      method: "GET",
+      description: "Obtiene todas las tarjetas",
+    },
+    {
+      path: "https://exercice-3-1.onrender.com/getCard/:id",
+      method: "GET",
+      description: "Obtiene una tarjeta por su ID",
+    },
+    {
+      path: "https://exercice-3-1.onrender.com/updateCard/:id",
+      method: "PUT",
+      description: "Actualiza completamente una tarjeta por su ID",
+    },
+    {
+      path: "https://exercice-3-1.onrender.com/updateCard/:id",
+      method: "PATCH",
+      description: "Actualiza parcialmente una tarjeta por su ID",
+    },
+    {
+      path: "https://exercice-3-1.onrender.com/deleteCard/:id",
+      method: "DELETE",
+      description: "Elimina una tarjeta por su ID",
+    },
+  ];
+
+  res.json(template);
+});
