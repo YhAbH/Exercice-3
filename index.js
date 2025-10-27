@@ -32,7 +32,7 @@ app.get("/getCard/:id", async (req, res) => {
   }
 });
 
-app.put("/updateAllCard/:id", async (req, res) => {
+app.put("/updateCard/:id", async (req, res) => {
   try {
     const card = await Card.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
