@@ -99,7 +99,7 @@ app.get("/Hola", (req, res) => {
 app.listen(3000, () => {
   console.log("Server is running on http://localhost:3000");
 });
-app.get("/template", (req, res) => {
+app.get("/endpoints", (req, res) => {
   const template = [
     {
       path: "https://exercice-3-1.onrender.com/createCard",
