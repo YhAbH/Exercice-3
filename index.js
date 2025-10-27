@@ -25,10 +25,12 @@ app.get("/getAllCards", async (req, res) => {
 });
 app.get("/getCard/:id", async (req, res) => {
   try {
-    const card = await Card.find();
-    res.status(200).json(card).send("Card created succesfully");
+    const card = await Card.findById(req.params.id); // ✅ Busca solo por id
+    if (!card) return res.status(404).send("Card not found");
+    res.status(200).json(card);
   } catch (error) {
     console.error(error);
+    res.status(500).send("Error fetching card");
   }
 });
 
