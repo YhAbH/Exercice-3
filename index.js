@@ -1,12 +1,13 @@
 import express from "express";
 import { conectDB } from "./db.js";
 import { Card } from "./models/Card.js";
+import cors from "cors";
 const app = express();
 conectDB();
 //app representa el sevidor
 
 app.use(express.json());
-
+app.use(cors());
 app.post("/createCard", async (req, res) => {
   try {
     const card = await Card.create(req.body);
