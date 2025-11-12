@@ -2,6 +2,7 @@ import express from "express";
 import { conectDB } from "./db.js";
 import { Card } from "./models/Card.js";
 import cors from "cors";
+import { Students } from "./student.js";
 const app = express();
 conectDB();
 //app representa el sevidor
@@ -135,4 +136,40 @@ app.get("/endpoints", (req, res) => {
   ];
 
   res.json(template);
+});
+
+// Crear un registro
+app.post("/Students", async (req, res) => {
+  try {
+    const students = await Students.create(req.body);
+    res.status(201).json(students);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error creating student");
+  }
+});
+
+// Obtener todos
+app.get("/Students", async (req, res) => {
+  try {
+    const students = await Students.find();
+    res.status(200).json(students);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching students");
+  }
+});
+// Obtener un estudiante por su ID
+app.get("/Students/:id", async (req, res) => {
+  try {
+    const student = await Students.findById(req.params.id);
+    if (!student) {
+      return res.status(404).send("Student not found");
+    }
+    res.status(200).json(student);
+    a;
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching student");
+  }
 });
