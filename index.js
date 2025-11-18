@@ -62,15 +62,18 @@ app.patch("/updateCard/:id", async (req, res) => {
     res.status(500).send("Error partially updating card");
   }
 });
-
 app.delete("/deleteCard/:id", async (req, res) => {
   try {
     const card = await Card.findByIdAndDelete(req.params.id);
-    if (!card) return res.status(404).send("Card not found");
-    res.status(200).send("Card deleted successfully");
+
+    if (!card) {
+      return res.status(404).json({ error: "Card not found" });
+    }
+
+    res.status(200).json({ message: "Card deleted successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).send("Error deleting card");
+    res.status(500).json({ error: "Error deleting card" });
   }
 });
 
